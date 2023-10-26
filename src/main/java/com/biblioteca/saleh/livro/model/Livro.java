@@ -1,7 +1,9 @@
 package com.biblioteca.saleh.livro.model;
 
+import com.biblioteca.saleh.autor.model.Autor;
 import com.biblioteca.saleh.editora.model.Editora;
 import com.biblioteca.saleh.genero.model.Genero;
+import com.biblioteca.saleh.pessoa.model.Pessoa;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +27,14 @@ public class Livro {
     @ManyToOne
     @JoinColumn(name = "id_genero")
     private Genero genero;
+
+    @ManyToOne
+    @JoinColumn(name = "id_autor")
+    private Autor autor;
+
+    @ManyToOne
+    @JoinColumn(name = "id_pessoa")
+    private Pessoa pessoaEmprestado;
 
     private int quantidadeEmprestada;
 

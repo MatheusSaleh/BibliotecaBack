@@ -1,17 +1,19 @@
-package com.biblioteca.saleh.autor.model;
+package com.biblioteca.saleh.pessoa.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "autor")
+@Table(name = "pessoa")
 @Getter
 @Setter
-public class Autor {
+public class Pessoa {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_autor")
+    @Column(name = "id_pessoa")
     private Long id;
 
     private String nome;
+
+    private String endereco;
 }
