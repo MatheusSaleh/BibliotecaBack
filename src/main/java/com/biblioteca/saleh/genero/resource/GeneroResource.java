@@ -1,12 +1,11 @@
 package com.biblioteca.saleh.genero.resource;
 
 import com.biblioteca.saleh.genero.dto.GeneroDTO;
+import com.biblioteca.saleh.genero.form.GeneroForm;
 import com.biblioteca.saleh.genero.service.GeneroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +19,15 @@ public class GeneroResource {
     @GetMapping
     public ResponseEntity<List<GeneroDTO>> listarGeneros(){
         return this.generoService.listarGeneros();
+    }
+
+    @GetMapping("/{idGenero}")
+    public ResponseEntity<GeneroDTO> listarGenero(@PathVariable Long idGenero){
+        return this.generoService.listarGenero(idGenero);
+    }
+
+    @PostMapping
+    public ResponseEntity<GeneroDTO> cadastrarGenero(@RequestBody GeneroForm formulario){
+        return this.generoService.cadastrarGenero(formulario);
     }
 }

@@ -1,12 +1,11 @@
 package com.biblioteca.saleh.autor.resource;
 
 import com.biblioteca.saleh.autor.dto.AutorDTO;
+import com.biblioteca.saleh.autor.form.AutorForm;
 import com.biblioteca.saleh.autor.service.AutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +19,15 @@ public class AutorResource {
     @GetMapping
     public ResponseEntity<List<AutorDTO>> listarAutores(){
         return this.autorService.listarAutores();
+    }
+
+    @GetMapping("/{idAutor}")
+    public ResponseEntity<AutorDTO> listarAutor(@PathVariable Long idAutor){
+        return this.autorService.listarAutor(idAutor);
+    }
+
+    @PostMapping
+    public ResponseEntity<AutorDTO> cadastrarAutor(@RequestBody AutorForm formulario){
+        return this.autorService.cadastrarAutor(formulario);
     }
 }
