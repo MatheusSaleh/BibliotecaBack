@@ -23,4 +23,5 @@ INSERT INTO PESSOA (nome, endereco) VALUES ('Alex Polleto', 'Av. Dom Antonio');
 INSERT INTO PESSOA (nome, endereco) VALUES ('Almir Rogério Camolesi', 'Rua Floriano Peixoto');
 INSERT INTO PESSOA (nome, endereco) VALUES ('Luiz Ricardo Begosso', 'Rua Candido Mota');
 
+
 INSERT INTO LIVRO (data_do_ultimo_emprestimo, nome, quantidade_emprestada, id_autor, id_editora, id_genero, id_pessoa) VALUES ('2023-10-26', 'Capitães Da Areia', 2, 3, 2, 1, 2);
