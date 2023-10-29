@@ -1,5 +1,6 @@
 package com.biblioteca.saleh.livro.service;
 
+import com.biblioteca.saleh.livro.dto.LivroCountDTO;
 import com.biblioteca.saleh.livro.dto.LivroDTO;
 import com.biblioteca.saleh.livro.form.LivroForm;
 import com.biblioteca.saleh.livro.model.Livro;
@@ -37,6 +38,10 @@ public class LivroService {
         livro.setDataDoUltimoEmprestimo(formulario.getDataDoUltimoEmprestimo());
         livro = livroRepository.save(livro);
         return ResponseEntity.ok(LivroDTO.fromLivro(livro));
+    }
+
+    public List<LivroCountDTO> consultarLivrosPorAutorEGenero(){
+        return livroRepository.consultaPivot();
     }
 
     public Livro buscarLivro(Long idLivro){
