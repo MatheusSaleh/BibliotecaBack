@@ -33,6 +33,19 @@ public class GeneroService {
         return ResponseEntity.ok(GeneroDTO.fromGenero(genero));
     }
 
+    public ResponseEntity<GeneroDTO> atualizarGenero(Long idGenero, GeneroForm formulario){
+        Genero genero = this.buscarGenero(idGenero);
+        genero.setNome(formulario.getNome());
+        genero = generoRepository.save(genero);
+        return ResponseEntity.ok(GeneroDTO.fromGenero(genero));
+    }
+
+    public ResponseEntity<Void> deleteGenero(Long idGenero){
+        Genero genero = this.buscarGenero(idGenero);
+        this.generoRepository.deleteById(idGenero);
+        return ResponseEntity.ok().build();
+    }
+
     public Genero buscarGenero(Long idGenero){
         Optional<Genero> optionalGenero = this.generoRepository.findById(idGenero);
         return optionalGenero.get();

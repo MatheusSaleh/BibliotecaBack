@@ -30,4 +30,14 @@ public class EditoraResource {
     public ResponseEntity<EditoraDTO> cadastrarEditora(@RequestBody EditoraForm formulario){
         return this.editoraService.cadastrarEditora(formulario);
     }
+
+    @PutMapping("/{idEditora}")
+    public ResponseEntity<EditoraDTO> atualizarEditora(@PathVariable Long idEditora, @RequestBody EditoraForm formulario){
+        return this.editoraService.atualizarEditora(idEditora, formulario);
+    }
+
+    @DeleteMapping("/{idEditora}")
+    public ResponseEntity<EditoraDTO> deleteEditora(@PathVariable Long idEditora){
+        return this.editoraService.deleteEditora(idEditora);
+    }
 }

@@ -44,6 +44,25 @@ public class LivroService {
         return livroRepository.consultaPivot();
     }
 
+    public ResponseEntity<LivroDTO> atualizarLivro(Long idLivro, LivroForm formulario){
+        Livro livro = this.buscarLivro(idLivro);
+        livro.setNome(formulario.getNome());
+        livro.setEditora(formulario.getEditora());
+        livro.setGenero(formulario.getGenero());
+        livro.setAutor(formulario.getAutor());
+        livro.setPessoaEmprestado(formulario.getPessoaEmprestado());
+        livro.setQuantidadeEmprestada(formulario.getQuantidadeEmprestada());
+        livro.setDataDoUltimoEmprestimo(formulario.getDataDoUltimoEmprestimo());
+        livro = livroRepository.save(livro);
+        return ResponseEntity.ok(LivroDTO.fromLivro(livro));
+    }
+
+    public ResponseEntity<Void> deleteLivro(Long idLivro){
+        Livro livro = this.buscarLivro(idLivro);
+        this.livroRepository.deleteById(livro.getId());
+        return ResponseEntity.ok().build();
+    }
+
     public Livro buscarLivro(Long idLivro){
         Optional<Livro> optionalLivro = this.livroRepository.findById(idLivro);
         return optionalLivro.get();

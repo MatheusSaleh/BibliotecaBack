@@ -30,4 +30,14 @@ public class AutorResource {
     public ResponseEntity<AutorDTO> cadastrarAutor(@RequestBody AutorForm formulario){
         return this.autorService.cadastrarAutor(formulario);
     }
+
+    @PutMapping("/{idAutor}")
+    public ResponseEntity<AutorDTO> atualizarAutor(@PathVariable Long idAutor, @RequestBody AutorForm formulario){
+        return this.autorService.atualizarAutor(idAutor, formulario);
+    }
+
+    @DeleteMapping("/{idAutor}")
+    public ResponseEntity<AutorDTO> deletarAutor(@PathVariable Long idAutor){
+        return this.autorService.deleteAutor(idAutor);
+    }
 }

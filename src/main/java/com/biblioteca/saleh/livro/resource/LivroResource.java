@@ -37,4 +37,14 @@ public class LivroResource {
     public ResponseEntity<LivroDTO> cadastrarLivro(@RequestBody LivroForm formulario){
         return this.livroService.cadastrarLivro(formulario);
     }
+
+    @PutMapping("/{idLivro}")
+    public ResponseEntity<LivroDTO> atualizarLivro(@PathVariable Long idLivro, @RequestBody LivroForm formulario){
+        return this.livroService.atualizarLivro(idLivro, formulario);
+    }
+
+    @DeleteMapping("/{idLivro}")
+    public ResponseEntity<Void> deletarLivro(@PathVariable Long idLivro){
+        return this.livroService.deleteLivro(idLivro);
+    }
 }

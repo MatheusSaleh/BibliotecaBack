@@ -33,6 +33,19 @@ public class AutorService {
         return ResponseEntity.ok(AutorDTO.fromAutor(autor));
     }
 
+    public ResponseEntity<AutorDTO> atualizarAutor(Long idAutor, AutorForm formulario){
+        Autor autor = this.buscarAutor(idAutor);
+        autor.setNome(formulario.getNome());
+        autor = autorRepository.save(autor);
+        return ResponseEntity.ok(AutorDTO.fromAutor(autor));
+    }
+
+    public ResponseEntity<AutorDTO> deleteAutor(Long idAutor){
+        Autor autor = this.buscarAutor(idAutor);
+        this.autorRepository.deleteById(autor.getId());
+        return ResponseEntity.ok().build();
+    }
+
     public Autor buscarAutor(Long idAutor){
         Optional<Autor> optionalAutor = this.autorRepository.findById(idAutor);
         return optionalAutor.get();

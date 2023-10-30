@@ -33,6 +33,19 @@ public class EditoraService {
         return ResponseEntity.ok(EditoraDTO.fromEditora(editora));
     }
 
+    public ResponseEntity<EditoraDTO> atualizarEditora(Long idEditora, EditoraForm formulario){
+        Editora editora = this.buscarEditora(idEditora);
+        editora.setNome(formulario.getNome());
+        editora = editoraRepository.save(editora);
+        return ResponseEntity.ok(EditoraDTO.fromEditora(editora));
+    }
+
+    public ResponseEntity<EditoraDTO> deleteEditora(Long idEditora){
+        Editora editora = this.buscarEditora(idEditora);
+        this.editoraRepository.deleteById(editora.getId());
+        return ResponseEntity.ok().build();
+    }
+
     public Editora buscarEditora(Long idEditora){
         Optional<Editora> optionalEditora = this.editoraRepository.findById(idEditora);
         return optionalEditora.get();
