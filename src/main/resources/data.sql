@@ -25,3 +25,21 @@ INSERT INTO PESSOA (nome, endereco) VALUES ('Luiz Ricardo Begosso', 'Rua Candido
 
 
 INSERT INTO LIVRO (data_do_ultimo_emprestimo, nome, quantidade_emprestada, id_autor, id_editora, id_genero, id_pessoa) VALUES ('2023-10-26', 'Capitães Da Areia', 2, 3, 2, 1, 2);
+
+INSERT INTO venda (data_venda, valor)
+VALUES ('2023-10-30', 100.00);
+
+INSERT INTO venda (data_venda, valor)
+VALUES ('2023-10-31', 150.50);
+
+INSERT INTO venda (data_venda, valor)
+VALUES ('2023-11-15', 75.25);
+
+INSERT INTO venda (data_venda, valor)
+VALUES ('2023-12-05', 120.50);
+
+INSERT INTO venda (data_venda, valor)
+VALUES ('2024-01-20', 85.75);
+
+INSERT INTO venda (data_venda, valor)
+VALUES ('2024-02-10', 200.00);

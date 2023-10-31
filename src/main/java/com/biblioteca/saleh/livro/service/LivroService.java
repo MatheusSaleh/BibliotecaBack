@@ -41,8 +41,10 @@ public class LivroService {
     }
 
     public List<LivroCountDTO> consultarLivrosPorAutorEGenero(){
-        return livroRepository.consultaPivot();
+        return livroRepository.consultaAgrupamento();
     }
+
+
 
     public ResponseEntity<LivroDTO> atualizarLivro(Long idLivro, LivroForm formulario){
         Livro livro = this.buscarLivro(idLivro);

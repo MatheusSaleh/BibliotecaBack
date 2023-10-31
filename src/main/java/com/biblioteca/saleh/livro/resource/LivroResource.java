@@ -27,7 +27,7 @@ public class LivroResource {
         return this.livroService.listarLivro(idLivro);
     }
 
-    @GetMapping("/consulta-pivot")
+    @GetMapping("/consulta-agrupamento")
     public ResponseEntity<List<LivroCountDTO>> consultarLivrosPorAutorEGenero(){
         List<LivroCountDTO> resultadoConsulta = livroService.consultarLivrosPorAutorEGenero();
         return new ResponseEntity<>(resultadoConsulta, HttpStatus.OK);

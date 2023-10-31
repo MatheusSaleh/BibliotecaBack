@@ -29,4 +29,14 @@ public class PessoaResource {
     public ResponseEntity<PessoaDTO> cadastrarPessoa(@RequestBody PessoaForm formulario){
         return this.pessoaService.cadastrarPessoa(formulario);
     }
+
+    @PutMapping("/{idPessoa}")
+    public ResponseEntity<PessoaDTO> atualizarPessoa(@PathVariable Long idPessoa, @RequestBody PessoaForm formulario){
+        return this.pessoaService.atualizarPessoa(idPessoa, formulario);
+    }
+
+    @DeleteMapping("/{idPessoa}")
+    public ResponseEntity<Void> deletarPessoa(@PathVariable Long idPessoa){
+        return this.pessoaService.deletePessoa(idPessoa);
+    }
 }

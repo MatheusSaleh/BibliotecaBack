@@ -34,6 +34,20 @@ public class PessoaService {
         return ResponseEntity.ok(PessoaDTO.fromPessoa(pessoa));
     }
 
+    public ResponseEntity<PessoaDTO> atualizarPessoa(Long idPessoa, PessoaForm formulario){
+        Pessoa pessoa = this.buscarPessoa(idPessoa);
+        pessoa.setNome(formulario.getNome());
+        pessoa.setEndereco(formulario.getEndereco());
+        pessoa = pessoaRepository.save(pessoa);
+        return ResponseEntity.ok(PessoaDTO.fromPessoa(pessoa));
+    }
+
+    public ResponseEntity<Void> deletePessoa(Long idPessoa){
+        Pessoa pessoa = this.buscarPessoa(idPessoa);
+        this.pessoaRepository.deleteById(pessoa.getId());
+        return ResponseEntity.ok().build();
+    }
+
     public Pessoa buscarPessoa(Long idPessoa){
         Optional<Pessoa> optionalPessoa = this.pessoaRepository.findById(idPessoa);
         return optionalPessoa.get();

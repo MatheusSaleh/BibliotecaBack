@@ -13,6 +13,7 @@ public interface LivroRepository extends JpaRepository<Livro, Long> {
             "JOIN l.autor a " +
             "JOIN l.genero g " +
             "GROUP BY a.nome, g.nome")
-    List<LivroCountDTO> consultaPivot();
+    List<LivroCountDTO> consultaAgrupamento();
+
 
 }
