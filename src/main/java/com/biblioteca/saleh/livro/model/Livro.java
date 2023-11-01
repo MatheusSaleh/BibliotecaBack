@@ -39,4 +39,6 @@ public class Livro {
     private int quantidadeEmprestada;
 
     private LocalDate dataDoUltimoEmprestimo;
+
+    private boolean disponivel;
 }

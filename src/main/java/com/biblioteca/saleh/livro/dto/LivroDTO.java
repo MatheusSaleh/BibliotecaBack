@@ -10,10 +10,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public record LivroDTO(Long id, String nome, Editora editora, Genero genero, Autor autor, Pessoa pessoaEmprestado, int quantidadeEmprestada, LocalDate dataDoUltimoEmprestimo) {
+public record LivroDTO(Long id, String nome, Editora editora, Genero genero, Autor autor, Pessoa pessoaEmprestado, int quantidadeEmprestada, LocalDate dataDoUltimoEmprestimo, boolean disponivel) {
 
     public static LivroDTO fromLivro(Livro livro){
-        return new LivroDTO(livro.getId(), livro.getNome(), livro.getEditora(), livro.getGenero(), livro.getAutor(), livro.getPessoaEmprestado(), livro.getQuantidadeEmprestada(), livro.getDataDoUltimoEmprestimo());
+        return new LivroDTO(livro.getId(), livro.getNome(), livro.getEditora(), livro.getGenero(), livro.getAutor(), livro.getPessoaEmprestado(), livro.getQuantidadeEmprestada(), livro.getDataDoUltimoEmprestimo(), livro.isDisponivel());
     }
 
     public static List<LivroDTO> converter(List<Livro> livros){

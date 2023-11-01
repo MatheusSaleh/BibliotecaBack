@@ -2,13 +2,18 @@ package com.biblioteca.saleh.livro.service;
 
 import com.biblioteca.saleh.livro.dto.LivroCountDTO;
 import com.biblioteca.saleh.livro.dto.LivroDTO;
+import com.biblioteca.saleh.livro.form.EmprestaDevolveLivroForm;
 import com.biblioteca.saleh.livro.form.LivroForm;
 import com.biblioteca.saleh.livro.model.Livro;
 import com.biblioteca.saleh.livro.repository.LivroRepository;
+import com.biblioteca.saleh.transacao.enums.TipoTransacao;
+import com.biblioteca.saleh.transacao.model.Transacao;
+import com.biblioteca.saleh.transacao.repository.TransacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +21,9 @@ import java.util.Optional;
 public class LivroService {
     @Autowired
     LivroRepository livroRepository;
+
+    @Autowired
+    TransacaoRepository transacaoRepository;
 
     public ResponseEntity<List<LivroDTO>> listarLivros(){
         List<Livro> livros = livroRepository.findAll();
@@ -36,6 +44,7 @@ public class LivroService {
         livro.setPessoaEmprestado(formulario.getPessoaEmprestado());
         livro.setQuantidadeEmprestada(formulario.getQuantidadeEmprestada());
         livro.setDataDoUltimoEmprestimo(formulario.getDataDoUltimoEmprestimo());
+        livro.setDisponivel(formulario.isDisponivel());
         livro = livroRepository.save(livro);
         return ResponseEntity.ok(LivroDTO.fromLivro(livro));
     }
@@ -44,7 +53,37 @@ public class LivroService {
         return livroRepository.consultaAgrupamento();
     }
 
+    public ResponseEntity<List<LivroDTO>> consultaLivrosDisponiveis(){
+        List<Livro> livrosDisponiveis = livroRepository.findByDisponivelTrue();
+        return ResponseEntity.ok(LivroDTO.converter(livrosDisponiveis));
+    }
 
+    public ResponseEntity<LivroDTO> emprestarLivro(Long livroId, EmprestaDevolveLivroForm formulario){
+        Livro livro = this.buscarLivro(livroId);
+        livro.setDisponivel(false);
+        livro.setPessoaEmprestado(formulario.getPessoaEmprestado());
+        livroRepository.save(livro);
+
+        Transacao transacao = new Transacao();
+        transacao.setData(LocalDate.now());
+        transacao.setTipo(TipoTransacao.EMPRESTIMO);
+        transacao.setLivro(livro);
+        transacaoRepository.save(transacao);
+        return ResponseEntity.ok(LivroDTO.fromLivro(livro));
+    }
+
+    public ResponseEntity<LivroDTO> devolverLivro(Long livroId){
+        Livro livro = this.buscarLivro(livroId);
+        livro.setDisponivel(true);
+        livroRepository.save(livro);
+
+        Transacao transacao = new Transacao();
+        transacao.setData(LocalDate.now());
+        transacao.setTipo(TipoTransacao.DEVOLUCAO);
+        transacao.setLivro(livro);
+        transacaoRepository.save(transacao);
+        return ResponseEntity.ok(LivroDTO.fromLivro(livro));
+    }
 
     public ResponseEntity<LivroDTO> atualizarLivro(Long idLivro, LivroForm formulario){
         Livro livro = this.buscarLivro(idLivro);

@@ -2,6 +2,7 @@ package com.biblioteca.saleh.livro.resource;
 
 import com.biblioteca.saleh.livro.dto.LivroCountDTO;
 import com.biblioteca.saleh.livro.dto.LivroDTO;
+import com.biblioteca.saleh.livro.form.EmprestaDevolveLivroForm;
 import com.biblioteca.saleh.livro.form.LivroForm;
 import com.biblioteca.saleh.livro.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,24 @@ public class LivroResource {
         return new ResponseEntity<>(resultadoConsulta, HttpStatus.OK);
     }
 
+    @GetMapping("/consulta-livros-disponiveis")
+    public ResponseEntity<List<LivroDTO>> consultarLivrosDisponiveis(){
+        return this.livroService.consultaLivrosDisponiveis();
+    }
+
     @PostMapping
     public ResponseEntity<LivroDTO> cadastrarLivro(@RequestBody LivroForm formulario){
         return this.livroService.cadastrarLivro(formulario);
+    }
+
+    @PostMapping("/emprestar-livro/{livroId}")
+    public ResponseEntity<LivroDTO> emprestarLivro(@PathVariable Long livroId, @RequestBody EmprestaDevolveLivroForm formulario){
+        return this.livroService.emprestarLivro(livroId, formulario);
+    }
+
+    @PostMapping("/devolver-livro/{livroId}")
+    public ResponseEntity<LivroDTO> devolverLivro(@PathVariable Long livroId){
+        return this.livroService.devolverLivro(livroId);
     }
 
     @PutMapping("/{idLivro}")

@@ -23,4 +23,6 @@ public class LivroForm {
     private int quantidadeEmprestada;
 
     private LocalDate dataDoUltimoEmprestimo;
+
+    private boolean disponivel;
 }

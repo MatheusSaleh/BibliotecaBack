@@ -15,5 +15,5 @@ public interface LivroRepository extends JpaRepository<Livro, Long> {
             "GROUP BY a.nome, g.nome")
     List<LivroCountDTO> consultaAgrupamento();
 
-
+    List<Livro> findByDisponivelTrue();
 }

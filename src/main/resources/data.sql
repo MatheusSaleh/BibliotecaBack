@@ -23,8 +23,13 @@ INSERT INTO PESSOA (nome, endereco) VALUES ('Alex Polleto', 'Av. Dom Antonio');
 INSERT INTO PESSOA (nome, endereco) VALUES ('Almir Rogério Camolesi', 'Rua Floriano Peixoto');
 INSERT INTO PESSOA (nome, endereco) VALUES ('Luiz Ricardo Begosso', 'Rua Candido Mota');
 
-
-INSERT INTO LIVRO (data_do_ultimo_emprestimo, nome, quantidade_emprestada, id_autor, id_editora, id_genero, id_pessoa) VALUES ('2023-10-26', 'Capitães Da Areia', 2, 3, 2, 1, 2);
+INSERT INTO livro (nome, id_editora, id_genero, id_autor, quantidade_emprestada, data_do_ultimo_emprestimo, disponivel)
+VALUES
+    ('Quincas Borba', 1, 1, 1, 0, '2023-11-01', true),
+    ('Dom Casmurro', 2, 2, 2, 0, '2023-11-01', true),
+    ('Capitaes da Areia', 3, 3, 3, 0, '2023-11-01', true),
+    ('Primo Basilio', 1, 2, 4, 0, '2023-11-01', true),
+    ('Iracema', 2, 3, 5, 0, '2023-11-01', true);
 
 INSERT INTO venda (data_venda, valor)
 VALUES ('2023-10-30', 100.00);
@@ -43,3 +48,7 @@ VALUES ('2024-01-20', 85.75);
 
 INSERT INTO venda (data_venda, valor)
 VALUES ('2024-02-10', 200.00);
+
+
+
+
