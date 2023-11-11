@@ -1,5 +1,6 @@
 package com.biblioteca.saleh.livro.service;
 
+import com.biblioteca.saleh.exception.handler.ObjetoNaoEncontradoException;
 import com.biblioteca.saleh.livro.dto.LivroCountDTO;
 import com.biblioteca.saleh.livro.dto.LivroDTO;
 import com.biblioteca.saleh.livro.form.EmprestaDevolveLivroForm;
@@ -106,6 +107,9 @@ public class LivroService {
 
     public Livro buscarLivro(Long idLivro){
         Optional<Livro> optionalLivro = this.livroRepository.findById(idLivro);
+        if(optionalLivro.isEmpty()){
+            throw new ObjetoNaoEncontradoException("Livro com o id"+idLivro+" não encontrado");
+        }
         return optionalLivro.get();
     }
 }

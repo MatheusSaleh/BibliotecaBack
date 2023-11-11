@@ -4,6 +4,7 @@ import com.biblioteca.saleh.autor.dto.AutorDTO;
 import com.biblioteca.saleh.autor.form.AutorForm;
 import com.biblioteca.saleh.autor.model.Autor;
 import com.biblioteca.saleh.autor.repository.AutorRepository;
+import com.biblioteca.saleh.exception.handler.ObjetoNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,9 @@ public class AutorService {
 
     public Autor buscarAutor(Long idAutor){
         Optional<Autor> optionalAutor = this.autorRepository.findById(idAutor);
+        if(optionalAutor.isEmpty()){
+            throw new ObjetoNaoEncontradoException("Autor com o id"+idAutor+" não encontrado");
+        }
         return optionalAutor.get();
     }
 

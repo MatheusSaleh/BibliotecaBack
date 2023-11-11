@@ -32,12 +32,11 @@ public class GeneroResource {
     }
 
     @PutMapping("/{idGenero}")
-    public ResponseEntity<GeneroDTO> atualizarGenero(@PathVariable Long idGenero, GeneroForm formulario){
+    public ResponseEntity<GeneroDTO> atualizarGenero(@PathVariable Long idGenero,@RequestBody GeneroForm formulario){
         return this.generoService.atualizarGenero(idGenero, formulario);
     }
 
     @DeleteMapping("/{idGenero}")
-    public ResponseEntity<Void> deletarAutor(@PathVariable Long idGenero){
+    public ResponseEntity<Void> deletarAutor(@PathVariable Long idGenero) {
         return this.generoService.deleteGenero(idGenero);
-    }
-}
+    }}

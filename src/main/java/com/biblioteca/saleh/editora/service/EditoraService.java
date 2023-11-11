@@ -4,6 +4,7 @@ import com.biblioteca.saleh.editora.dto.EditoraDTO;
 import com.biblioteca.saleh.editora.form.EditoraForm;
 import com.biblioteca.saleh.editora.model.Editora;
 import com.biblioteca.saleh.editora.repository.EditoraRepository;
+import com.biblioteca.saleh.exception.handler.ObjetoNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,9 @@ public class EditoraService {
 
     public Editora buscarEditora(Long idEditora){
         Optional<Editora> optionalEditora = this.editoraRepository.findById(idEditora);
+        if(optionalEditora.isEmpty()){
+            throw new ObjetoNaoEncontradoException("Editora com o id"+idEditora+" não encontrado");
+        }
         return optionalEditora.get();
     }
 }

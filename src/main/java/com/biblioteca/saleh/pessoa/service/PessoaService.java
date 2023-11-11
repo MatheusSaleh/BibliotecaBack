@@ -1,5 +1,6 @@
 package com.biblioteca.saleh.pessoa.service;
 
+import com.biblioteca.saleh.exception.handler.ObjetoNaoEncontradoException;
 import com.biblioteca.saleh.pessoa.dto.PessoaDTO;
 import com.biblioteca.saleh.pessoa.form.PessoaForm;
 import com.biblioteca.saleh.pessoa.model.Pessoa;
@@ -50,6 +51,9 @@ public class PessoaService {
 
     public Pessoa buscarPessoa(Long idPessoa){
         Optional<Pessoa> optionalPessoa = this.pessoaRepository.findById(idPessoa);
+        if(optionalPessoa.isEmpty()){
+            throw new ObjetoNaoEncontradoException("Pessoa com o id"+idPessoa+" não encontrado");
+        }
         return optionalPessoa.get();
     }
 }

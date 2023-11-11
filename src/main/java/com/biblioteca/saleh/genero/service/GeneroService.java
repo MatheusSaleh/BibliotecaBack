@@ -1,5 +1,6 @@
 package com.biblioteca.saleh.genero.service;
 
+import com.biblioteca.saleh.exception.handler.ObjetoNaoEncontradoException;
 import com.biblioteca.saleh.genero.dto.GeneroDTO;
 import com.biblioteca.saleh.genero.form.GeneroForm;
 import com.biblioteca.saleh.genero.model.Genero;
@@ -48,6 +49,9 @@ public class GeneroService {
 
     public Genero buscarGenero(Long idGenero){
         Optional<Genero> optionalGenero = this.generoRepository.findById(idGenero);
+        if(optionalGenero.isEmpty()){
+            throw new ObjetoNaoEncontradoException("Genero com o id"+idGenero+" não encontrado");
+        }
         return optionalGenero.get();
     }
 }
