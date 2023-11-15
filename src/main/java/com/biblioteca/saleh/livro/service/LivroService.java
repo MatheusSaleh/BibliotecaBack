@@ -63,6 +63,7 @@ public class LivroService {
         Livro livro = this.buscarLivro(livroId);
         livro.setDisponivel(false);
         livro.setPessoaEmprestado(formulario.getPessoaEmprestado());
+        livro.setQuantidadeEmprestada(livro.getQuantidadeEmprestada() + 1);
         livroRepository.save(livro);
 
         Transacao transacao = new Transacao();
